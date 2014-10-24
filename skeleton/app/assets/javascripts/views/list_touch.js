@@ -22,18 +22,10 @@ TrelloClone.Views.ListTouch = Backbone.View.extend({
     event.preventDefault();
 
     var listData = $(event.currentTarget).serializeJSON();
-
     var board = this.collection.board;
 
-    console.log(listData);
-
     listDataNext = _.extend(listData.list, { board_id: board.get("id") });
-
     this.model.set(listDataNext);
-
-    // var listDataWithBoard = _.extend(listData, { board_id: board.get("id") });
-
-    //this.model.set(listDataWithBoard);
 
     if (this.model.isNew()) {
       this.collection.create(this.model);
@@ -44,7 +36,11 @@ TrelloClone.Views.ListTouch = Backbone.View.extend({
     // may need to add some error handling
     // e.g. if user does not give board name
     this.remove();
-    Backbone.history.navigate("", {trigger: true});
+    var backNav = "/#/api/boards/" + this.collection.board.get("id");
+    console.log(backNav);
+
+    // why doesn't this work?!
+    Backbone.history.navigate(backNav, {trigger: true});
   }
 
 });
