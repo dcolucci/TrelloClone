@@ -1,0 +1,81 @@
+/* RESET */
+
+li, ul, html, body, div, main {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  list-style: none;
+}
+
+div {
+  display: block;
+}
+
+.backdrop, .board-container, .main, body, .html {
+  width: 100%;
+}
+
+input[type="textarea"],
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="submit"],
+button {
+  display: inline-block;
+  box-sizing: content-box;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+/* STYLEZ */
+
+.lists-list > li {
+  display: block;
+  float: left;
+  margin: 0 0 10px 10px;
+  background: gainsboro;
+  border-radius: 3px;
+  list-style: none;
+  width: 250px;
+}
+
+.cards-list > li {
+  display: block;
+  padding: 5px;
+  margin: 8px;
+  background: white;
+  border-radius: 3px;
+  list-style: none;
+  width: 234px;
+}
+
+.cards-list > li:last-child {
+  margin: 0;
+  width: 100%;
+  border-radius: 0 0 3px 3px;
+  background: gainsboro;
+}
+
+.cards-list > li:last-child:hover {
+  background: silver;
+  cursor: pointer;
+  color: grey;
+}
+
+.new-card-link-a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: grey;
+}
+
+.touch {
+
+}

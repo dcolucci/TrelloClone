@@ -1,10 +1,13 @@
-TrelloClone.Views.BoardShow = Backbone.View.extend({
+TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.model, "sync", function () {
       this.refresh();
       this._appendNewListLink();
     });
+
+    this.listenTo(this.collection, "add", this.renderLists);
+    this.$el.addClass("board-container");
   },
 
   template: JST['boards/show'],
@@ -16,17 +19,24 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 
     this.$el.html(content);
 
-    var $ul = this.$el.find('ul');
+    this.renderLists();
 
+    return this;
+  },
+
+  renderLists: function () {
+    var that = this;
+    var $ul = this.$el.find('.lists-list');
+
+    // collection is board's lists -- board.lists()
     this.collection.each (function (list) {
-      var listView = new TrelloClone.Views.ListSummary({
-        model: list
+      var listView = new TrelloClone.Views.ListShow({
+        model: list,
+        collection: list.cards()
       });
 
       $ul.append(listView.render().$el);
     });
-
-    return this;
   },
 
   refresh: function () {
@@ -38,8 +48,8 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
     var $linkEl = $('<li>');
     var url = this.model.url();
 
-    $linkEl.html('<a href="#/' + url + '/lists/new">New List...</a>');
-    this.$el.find('ul').append($linkEl);
+    $linkEl.html('<h4><a href="#/' + url + '/lists/new">New List...</a></h4>');
+    this.$el.find('.lists-list').append($linkEl);
   }
 
 });

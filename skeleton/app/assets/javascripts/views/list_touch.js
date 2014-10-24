@@ -37,7 +37,6 @@ TrelloClone.Views.ListTouch = Backbone.View.extend({
     // e.g. if user does not give board name
     this.remove();
     var backNav = "/#/api/boards/" + this.collection.board.get("id");
-    console.log(backNav);
 
     // why doesn't this work?!
     Backbone.history.navigate(backNav, {trigger: true});

@@ -8,8 +8,8 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
     "": "index",
     "api/boards/new": "newBoard",
     "api/boards/:id": "showBoard",
-    "api/boards/:id/lists/new": "newList",
-    "api/boards/:id/lists/:id": "showList"
+    "api/boards/:id/lists/new": "newList"
+    // "api/boards/:id/lists/:id/cards/new": "newCard"
   },
 
   index: function () {
@@ -39,8 +39,6 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
       collection: board.lists()
     });
 
-    //board.fetch();
-
     this._swapView(showBoardView);
   },
 
@@ -54,6 +52,21 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
       collection: board.lists()
     });
 
+    // refactor to use subviews?
+    this.$el.append(newListView.render().$el);
+  },
+
+  newCard: function (boardId, listId) {
+    // probably don't need getOrFetch here
+    var board = TrelloClone.boards.getOrFetch(boardId);
+    var newCard = new TrelloClone.Models.List({ board: board });
+
+    var newListView = new TrelloClone.Views.ListTouch({
+      model: newList,
+      collection: board.lists()
+    });
+
+    // refactor to use subviews?
     this.$el.append(newListView.render().$el);
   },
 
